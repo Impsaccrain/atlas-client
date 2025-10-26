@@ -211,8 +211,6 @@ export default class Router {
     }
 
     async begin(message) {
-        console.log(message);
-
         await loadTerrains();
 
         applyBiome(message[4]);
@@ -246,7 +244,9 @@ export default class Router {
                 //     }, 240000);
                 // }, 1000 * 60 * 60 * 8);
 
+                console.log('Before Init Terrain');
                 await initTerrain(state.biome);
+                console.log('After Init Terrain');
                 break;
             case "ffa":
                 state.isTDM = false;
