@@ -211,6 +211,8 @@ export default class Router {
     }
 
     async begin(message) {
+        console.log(message);
+
         await loadTerrains();
 
         applyBiome(message[4]);
