@@ -2078,7 +2078,7 @@ export class Mob extends Entity {
 
                     if (this.extraTicker <= 0) {
                         const a = Math.random() * Math.PI * 2;
-                        const d = Math.random() * (this.target.size * 8);
+                        const d = Math.random() * 280;
 
                         new Pentagram(this, {
                             x: this.target.x + Math.cos(a) * d,
