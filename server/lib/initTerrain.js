@@ -5,19 +5,21 @@ import { isHalloween } from "../../lib/util.js";
 import MazeGenerator from "./MazeGenerator.js";
 import Pathfinder from "./Pathfinder.js";
 
+const GITHUB_LINK = 'https://impsaccrain.github.io/atlas-client';
+
 const MAP_TYPES = {
-    standard: "./server/maps/standard.json",
-    antHell: "./server/maps/antHell.json",
-    desert: "./server/maps/desert.json",
-    pvp: "./server/maps/pvp.json",
-    ocean: "./server/maps/ocean.json",
-    hell: "./server/maps/hell.json",
-    sewers: "./server/maps/sewers.json",
-    darkForest: "./server/maps/darkForest.json",
-    allMobs: "./server/maps/allMobs.json",
-    sleepyMaze: "./server/maps/sleepyMaze.json",
-    sleepyMazeOmega: "./server/maps/sleepyMazeOmega.json",
-    atlasHell: "./server/maps/atlasHell.json"
+    standard: `${GITHUB_LINK}/server/maps/standard.json`,
+    antHell: `${GITHUB_LINK}/server/maps/antHell.json`,
+    desert: `${GITHUB_LINK}/server/maps/desert.json`,
+    pvp: `${GITHUB_LINK}/server/maps/pvp.json`,
+    ocean: `${GITHUB_LINK}/server/maps/ocean.json`,
+    hell: `${GITHUB_LINK}/server/maps/hell.json`,
+    sewers: `${GITHUB_LINK}/server/maps/sewers.json`,
+    darkForest: `${GITHUB_LINK}/server/maps/darkForest.json`,
+    allMobs: `${GITHUB_LINK}/server/maps/allMobs.json`,
+    sleepyMaze: `${GITHUB_LINK}/server/maps/sleepyMaze.json`,
+    sleepyMazeOmega: `${GITHUB_LINK}/server/maps/sleepyMazeOmega.json`,
+    atlasHell: `${GITHUB_LINK}/server/maps/atlasHell.json`
 };
 
 let mapSrc = MAP_TYPES.standard,
