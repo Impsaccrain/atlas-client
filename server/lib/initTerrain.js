@@ -59,6 +59,7 @@ export default async function initTerrain(type, atlas = true) {
         if (typeof mapSrc === "string") {
             const response = await fetch(mapSrc);
             map = await response.json();
+            console.log(mapSrc, map, response);
         } else {
             map = mapSrc;
         }
