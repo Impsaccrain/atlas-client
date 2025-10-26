@@ -358,7 +358,7 @@ export const petalConfigs = [
     new PetalConfig("Vyior", 0, 0, 0)
         .setMulti(0, false)
         .setExtraHealth(1e5)
-        .setExtraVision(20)
+        .setExtraVision(2)
         .setConstantHeal(1e5)
         .setDamageReduction(.2)
         .setSpeedMultiplier(1.275)
