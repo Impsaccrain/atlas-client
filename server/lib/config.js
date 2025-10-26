@@ -878,22 +878,17 @@ export const mobConfigs = [
 
 export const mobIDOf = name => mobConfigs.findIndex(m => m.name === name);
 
-export const defaultSpawnables = {
-    rarities: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 12, 13, 14, 15, 16],
-    cooldowns: [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 3, 3, 4, 4]
-};
-
-petalConfigs[petalIDOf("Beetle Egg")].setSpawnable(mobIDOf("Beetle"), defaultSpawnables.rarities, defaultSpawnables.cooldowns);
-petalConfigs[petalIDOf("Stick")].setSpawnable(mobIDOf("Sandstorm"), defaultSpawnables.rarities, defaultSpawnables.cooldowns);
-petalConfigs[petalIDOf("Ant Egg")].setSpawnable(mobIDOf("Soldier Ant"), defaultSpawnables.rarities, defaultSpawnables.cooldowns);
-petalConfigs[petalIDOf("Termite Egg")].setSpawnable(mobIDOf("Soldier Ant"), defaultSpawnables.rarities, defaultSpawnables.cooldowns);
-petalConfigs[petalIDOf("Fire Ant Egg")].setSpawnable(mobIDOf("Soldier Ant"), defaultSpawnables.rarities, defaultSpawnables.cooldowns);
-petalConfigs[petalIDOf("Branch")].setSpawnable(mobIDOf("Wilt") + 1, defaultSpawnables.rarities, defaultSpawnables.cooldowns);
-petalConfigs[petalIDOf("Leech Egg")].setSpawnable(mobIDOf("Leech"), defaultSpawnables.rarities, defaultSpawnables.cooldowns);
-petalConfigs[petalIDOf("Hornet Egg")].setSpawnable(mobIDOf("Hornet"), defaultSpawnables.rarities, defaultSpawnables.cooldowns);
-petalConfigs[petalIDOf("Square Egg")].setSpawnable(mobIDOf("Square"), defaultSpawnables.rarities, defaultSpawnables.cooldowns);
-petalConfigs[petalIDOf("Triangle Egg")].setSpawnable(mobIDOf("Triangle"), defaultSpawnables.rarities, defaultSpawnables.cooldowns);
-petalConfigs[petalIDOf("Pentagon Egg")].setSpawnable(mobIDOf("Pentagon"), defaultSpawnables.rarities, defaultSpawnables.cooldowns);
+petalConfigs[petalIDOf("Beetle Egg")].setSpawnable(mobIDOf("Beetle"), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 12, 13, 14, 15, 16], 4);
+petalConfigs[petalIDOf("Stick")].setSpawnable(mobIDOf("Sandstorm"), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 12, 13, 14, 15, 16], 5);
+petalConfigs[petalIDOf("Ant Egg")].setSpawnable(mobIDOf("Soldier Ant"), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 12, 13, 14, 15, 16], 6);
+petalConfigs[petalIDOf("Termite Egg")].setSpawnable(mobIDOf("Soldier Termite"), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 12, 13, 14, 15, 16], 6);
+petalConfigs[petalIDOf("Fire Ant Egg")].setSpawnable(mobIDOf("Soldier Fire Ant"), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 12, 13, 14, 15, 16], 6);
+petalConfigs[petalIDOf("Branch")].setSpawnable(mobIDOf("Wilt") + 1, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 12, 13, 14, 15, 16], 5);
+petalConfigs[petalIDOf("Leech Egg")].setSpawnable(mobIDOf("Leech"), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 12, 13, 14, 15, 16], 6);
+petalConfigs[petalIDOf("Hornet Egg")].setSpawnable(mobIDOf("Hornet"), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 12, 13, 14, 15, 16], 6);
+petalConfigs[petalIDOf("Square Egg")].setSpawnable(mobIDOf("Square"), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 12, 13, 14, 15, 16], 4);
+petalConfigs[petalIDOf("Triangle Egg")].setSpawnable(mobIDOf("Triangle"), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 12, 13, 14, 15, 16], 4);
+petalConfigs[petalIDOf("Pentagon Egg")].setSpawnable(mobIDOf("Pentagon"), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 12, 13, 14, 15, 16], 4);
 
 mobConfigs[mobIDOf("Angelic Ladybug")].setPoopable({
     index: mobIDOf("Evil Ladybug"),
