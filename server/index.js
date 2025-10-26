@@ -819,6 +819,10 @@ class ModdingAPI {
                     return;
                 }
 
+                if (args[3] > client.highestObtainedRarity) {
+                    client.highestObtainedRarity = args[3];
+                };
+
                 client.slots[args[1]].id = args[2];
                 client.slots[args[1]].rarity = args[3];
                 client.body.setSlot(args[1], args[2], args[3]);

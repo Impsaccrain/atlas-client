@@ -1,5 +1,6 @@
 import { CLIENT_BOUND, ENTITY_TYPES, GAMEMODES, ROUTER_PACKET_TYPES, Writer } from "../../lib/protocol.js";
 import { quickDiff } from "../../lib/util.js";
+import { tiers } from "./config.js";
 import SpatialHashGrid from "./SpatialHashGrid.js";
 
 // Zone coords work on a [-1, 1] scale with [0, 0] being the center of the map
@@ -206,7 +207,7 @@ const state = {
             if (dx * dx + dy * dy > minDist * minDist && state.isValidMapSpawn(position.x, position.y)) {
                 const baseRarity = state.mapSpawnClosestTo(position.x, position.y).rarity;
                 const goesUp = Math.random() > .5 * Math.pow(1.1015, baseRarity);
-                rarity = Math.min(11, Math.max(0, goesUp ? baseRarity + 1 : baseRarity - (Math.random() * 2 | 0)));
+                rarity = Math.min(tiers.length - 1, Math.max(0, goesUp ? baseRarity + 1 : baseRarity - (Math.random() * 2 | 0)));
 
                 const retrieved = state.spatialHash.retrieve({
                     _AABB: {
@@ -223,6 +224,12 @@ const state = {
                 }
             }
         } while (++k < 100);
+
+        if (rarity == 16 && Math.random() < 0.7) rarity = 15;
+        if (rarity == 17 && Math.random() < 0.3) {
+            if (Math.random() < 0.5) rarity = 16;
+            else rarity = 15;
+        };
 
         if (!isGood) {
             position = state.mapBasedSpawn(ENTITY_TYPES.MOB);

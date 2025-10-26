@@ -719,6 +719,7 @@ export default class Client {
 
     constructor(id, uuid, masterPermissions = 0) {
         this.id = id;
+        this.highestObtainedRarity = 0;
         this.verified = false;
         this.username = "unknown";
         this.uuid = uuid;
@@ -828,6 +829,12 @@ export default class Client {
     pickupDrop(drop) {
         for (let i = 0; i < this.secondarySlots.length; i++) {
             if (!this.secondarySlots[i]) {
+                if (drop.rarity > this.highestObtainedRarity) {
+                    this.highestObtainedRarity = drop.rarity;
+                    if (this.highestObtainedRarity >= 9) {
+                        state.clients.forEach(c => c.systemMessage(`${this.username} obtained their first ${tiers[this.highestObtainedRarity].name} petal!`, tiers[this.highestObtainedRarity].color));
+                    };
+                };
                 this.secondarySlots[i] = {
                     id: drop.index,
                     rarity: drop.rarity
