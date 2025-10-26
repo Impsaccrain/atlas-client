@@ -211,13 +211,9 @@ export default class Router {
     }
 
     async begin(message) {
-        console.log('Before Load Terrains');
         await loadTerrains();
-        console.log('After Load Terrains');
 
-        console.log('Before Apply Biome');
         applyBiome(message[4]);
-        console.log('After Apply Biome');
 
         /*if (Router.isSandbox && message[1] === "maze") {
             message[1] = "ffa";
