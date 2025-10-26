@@ -6,18 +6,18 @@ import MazeGenerator from "./MazeGenerator.js";
 import Pathfinder from "./Pathfinder.js";
 
 const MAP_TYPES = {
-    standard: "/server/maps/standard.json",
-    antHell: "/server/maps/antHell.json",
-    desert: "/server/maps/desert.json",
-    pvp: "/server/maps/pvp.json",
-    ocean: "/server/maps/ocean.json",
-    hell: "/server/maps/hell.json",
-    sewers: "/server/maps/sewers.json",
-    darkForest: "/server/maps/darkForest.json",
-    allMobs: "/server/maps/allMobs.json",
-    sleepyMaze: "/server/maps/sleepyMaze.json",
-    sleepyMazeOmega: "/server/maps/sleepyMazeOmega.json",
-    atlasHell: "/server/maps/atlasHell.json"
+    standard: "./server/maps/standard.json",
+    antHell: "./server/maps/antHell.json",
+    desert: "./server/maps/desert.json",
+    pvp: "./server/maps/pvp.json",
+    ocean: "./server/maps/ocean.json",
+    hell: "./server/maps/hell.json",
+    sewers: "./server/maps/sewers.json",
+    darkForest: "./server/maps/darkForest.json",
+    allMobs: "./server/maps/allMobs.json",
+    sleepyMaze: "./server/maps/sleepyMaze.json",
+    sleepyMazeOmega: "./server/maps/sleepyMazeOmega.json",
+    atlasHell: "./server/maps/atlasHell.json"
 };
 
 let mapSrc = MAP_TYPES.standard,
