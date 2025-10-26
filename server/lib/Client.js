@@ -5,7 +5,7 @@ import { mobConfigs, mobIDOf, petalConfigs, tiers } from "./config.js";
 import { xpForLevel } from "../../lib/util.js";
 
 const blockList = [];
-fetch("/profanity.txt").then(res => res.text()).then(txt => {
+fetch("./profanity.txt").then(res => res.text()).then(txt => {
     blockList.push(...txt.replaceAll("\r", "").split("\n").map(e => e.trim()));
     console.log("Profanity list loaded", blockList.length, "words");
 });
