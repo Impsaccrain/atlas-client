@@ -215,10 +215,10 @@ export default class Router {
 
         applyBiome(message[4]);
 
-        if (Router.isSandbox && message[1] === "maze") {
+        /*if (Router.isSandbox && message[1] === "maze") {
             message[1] = "ffa";
             console.warn("Maze is not supported in sandbox");
-        }
+        }*/
 
         switch (message[1]) {
             case "maze":
