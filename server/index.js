@@ -364,6 +364,7 @@ switch (globalThis.environmentName) {
 
                         try {
                             const res = await fetch(`${Bun.env.ROUTING_SERVER.replace("ws", "http")}/uuid/check?uuid=${client.uuid}&trustedKey=${Bun.env.SECRET}`);
+                            if (!res.ok) throw new Error('Bun server ran into an error trying to connect!');
                             const data = await res.json();
 
                             if (!data.ok || !data.isValid) {

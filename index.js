@@ -8,7 +8,10 @@ import { beginDragDrop, DRAG_TYPE_DESTROY, DRAG_TYPE_MAINDOCKER, DRAG_TYPE_SECON
 import { loadAndRenderChangelogs, showMenu, showMenus } from "./lib/menus.js";
 
 if (location.hash) {
-    fetch(SERVER_URL + "/lobby/get?partyURL=" + location.hash.slice(1)).then(response => response.json()).then(json => {
+    fetch(SERVER_URL + "/lobby/get?partyURL=" + location.hash.slice(1)).then(response => {
+        if (!response.ok) throw new Error('Lobby failed to respond!');
+        return response.json()
+    }).then(json => {
         if (json == null) {
             console.warn("Invalid party URL");
             location.hash = "";
