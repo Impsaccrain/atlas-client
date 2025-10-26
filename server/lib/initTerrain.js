@@ -17,12 +17,13 @@ const MAP_TYPES = {
     allMobs: "/server/maps/allMobs.json",
     sleepyMaze: "/server/maps/sleepyMaze.json",
     sleepyMazeOmega: "/server/maps/sleepyMazeOmega.json",
+    atlasHell: "/server/maps/atlasHell.json"
 };
 
 let mapSrc = MAP_TYPES.standard,
     map = [];
 
-export default async function initTerrain(type) {
+export default async function initTerrain(type, atlas = true) {
     if ((isHalloween && type === BIOME_TYPES.HALLOWEEN) || Math.random() > 1) { // temp disable for now
         map = generateRandomMap(56, 56, false);
     } else {
@@ -43,7 +44,7 @@ export default async function initTerrain(type) {
                 mapSrc = MAP_TYPES.antHell;
                 break;
             case BIOME_TYPES.HELL:
-                mapSrc = MAP_TYPES.hell;
+                mapSrc = atlas ? MAP_TYPES.atlasHell : MAP_TYPES.hell;
                 break;
             case BIOME_TYPES.SEWERS:
                 mapSrc = MAP_TYPES.sewers;

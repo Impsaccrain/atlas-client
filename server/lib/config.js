@@ -349,7 +349,25 @@ export const petalConfigs = [
     new PetalConfig("Pentagon Egg", 360, 200, 4)
         .setSize(1.8)
         .setHuddles(1)
-        .setDescription("This isn't from this world...")
+        .setDescription("This isn't from this world..."),
+    new PetalConfig("Termite Egg", 30, 8, 4)
+        .setSize(1.1)
+        .setMulti([2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3], false)
+        .setHuddles(1)
+        .setDescription("A petal that spawns termites. They reflect damage back."),
+    new PetalConfig("Vyior", 0, 0, 0)
+        .setMulti(0, false)
+        .setExtraHealth(1e5)
+        .setExtraVision(20)
+        .setConstantHeal(1e5)
+        .setDamageReduction(.2)
+        .setSpeedMultiplier(1.275)
+        .setDescription("/gamemode spectator"),
+    new PetalConfig("Fire Ant Egg", 30, 8, 4)
+        .setSize(1.1)
+        .setMulti([3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4], false)
+        .setHuddles(1)
+        .setDescription("A petal that spawns fire ants. They move faster, deal more damage, but have less health.")
 ];
 
 export const petalIDOf = name => petalConfigs.findIndex(p => p.name === name);
@@ -548,11 +566,11 @@ export const mobConfigs = [
         .setPushability(0.8)
         .addDrop(petalIDOf("Primrose"))
         .addDrop(petalIDOf("Dirt"), .5)
-        .addDrop(petalIDOf("Ant Egg"), .8),
+        .addDrop(petalIDOf("Fire Ant Egg"), .8),
     new MobConfig("Fire Ant Hole", 75, 2, 18, 0)
         .setPushability(0)
         .addDrop(petalIDOf("Dirt"))
-        .addDrop(petalIDOf("Ant Egg"), .5)
+        .addDrop(petalIDOf("Fire Ant Egg"), .5)
         .addDrop(petalIDOf("Magnet"), .4),
     new MobConfig("Baby Termite", 6, .3, 10, 2)
         .setDamageReduction(.1)
@@ -571,15 +589,15 @@ export const mobConfigs = [
         .setDamageReflection(.15)
         .addDrop(petalIDOf("Bone"), .5)
         .addDrop(petalIDOf("Amulet"), .15),
-    new MobConfig("Termite Overmind", 125, 2, 45, .5)
+    new MobConfig("Termite Overmind", 125, 2, 40, .5)
         .setAggressive(1)
         .setPushability(0.5)
         .setDamageReduction(.1)
         .setDamageReflection(.15)
-        .addDrop(petalIDOf("Ant Egg"), .5)
+        .addDrop(petalIDOf("Termite Egg"), .5)
         .addDrop(petalIDOf("Amulet"), .4)
         .addDrop(petalIDOf("Primrose"), .7),
-    new MobConfig("Termite Mound", 350, 1, 60, 0)
+    new MobConfig("Termite Mound", 350, 1, 45, 0)
         .setDamageReduction(.1)
         .setDamageReflection(.15)
         .setPushability(0)
@@ -593,13 +611,13 @@ export const mobConfigs = [
         .addDrop(petalIDOf("Ant Egg"), .4)
         .addDrop(petalIDOf("Dirt"), .1),
     new MobConfig("Fire Ant Egg", 25, 2, 8, 0)
-        .addDrop(petalIDOf("Ant Egg"), .8)
+        .addDrop(petalIDOf("Fire Ant Egg"), .8)
         .addDrop(petalIDOf("Yucca"), .8),
     new MobConfig("Queen Fire Ant Egg", 16, 1, 10, 0)
-        .addDrop(petalIDOf("Ant Egg"), .4)
+        .addDrop(petalIDOf("Fire Ant Egg"), .4)
         .addDrop(petalIDOf("Yucca"), .4),
     new MobConfig("Termite Egg", 25, 2, 13, 0)
-        .addDrop(petalIDOf("Ant Egg"), .8)
+        .addDrop(petalIDOf("Termite Egg"), .8)
         .addDrop(petalIDOf("Bone"), .8),
     new MobConfig("Evil Ladybug", 28, 6, 21, 3)
         .setAggressive(1)
@@ -759,7 +777,7 @@ export const mobConfigs = [
         .addDrop(petalIDOf("Missile"))
         .addDrop(petalIDOf("Antennae"), .5),
     new MobConfig("Termite Overmind Egg", 16, 1, 17, 0)
-        .addDrop(petalIDOf("Ant Egg"), .4)
+        .addDrop(petalIDOf("Termite Egg"), .4)
         .addDrop(petalIDOf("Amulet"), .4),
     new MobConfig("Spirit", 1e-10, 0, 35, 1)
         .setSpins(4, 1)
@@ -860,15 +878,22 @@ export const mobConfigs = [
 
 export const mobIDOf = name => mobConfigs.findIndex(m => m.name === name);
 
-petalConfigs[petalIDOf("Beetle Egg")].setSpawnable(mobIDOf("Beetle"), [0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 4);
-petalConfigs[petalIDOf("Stick")].setSpawnable(mobIDOf("Sandstorm"), [0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 5);
-petalConfigs[petalIDOf("Ant Egg")].setSpawnable(mobIDOf("Soldier Ant"), [0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 6);
-petalConfigs[petalIDOf("Branch")].setSpawnable(mobIDOf("Wilt") + 1, [0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 5);
-petalConfigs[petalIDOf("Leech Egg")].setSpawnable(mobIDOf("Leech"), [0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 6);
-petalConfigs[petalIDOf("Hornet Egg")].setSpawnable(mobIDOf("Hornet"), [0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 6);
-petalConfigs[petalIDOf("Square Egg")].setSpawnable(mobIDOf("Square"), [0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 4);
-petalConfigs[petalIDOf("Triangle Egg")].setSpawnable(mobIDOf("Triangle"), [0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 4);
-petalConfigs[petalIDOf("Pentagon Egg")].setSpawnable(mobIDOf("Pentagon"), [0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 4);
+export const defaultSpawnables = {
+    rarities: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 12, 13, 14, 15, 16],
+    cooldowns: [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 3, 3, 4, 4]
+};
+
+petalConfigs[petalIDOf("Beetle Egg")].setSpawnable(mobIDOf("Beetle"), defaultSpawnables.rarities, defaultSpawnables.cooldowns);
+petalConfigs[petalIDOf("Stick")].setSpawnable(mobIDOf("Sandstorm"), defaultSpawnables.rarities, defaultSpawnables.cooldowns);
+petalConfigs[petalIDOf("Ant Egg")].setSpawnable(mobIDOf("Soldier Ant"), defaultSpawnables.rarities, defaultSpawnables.cooldowns);
+petalConfigs[petalIDOf("Termite Egg")].setSpawnable(mobIDOf("Soldier Ant"), defaultSpawnables.rarities, defaultSpawnables.cooldowns);
+petalConfigs[petalIDOf("Fire Ant Egg")].setSpawnable(mobIDOf("Soldier Ant"), defaultSpawnables.rarities, defaultSpawnables.cooldowns);
+petalConfigs[petalIDOf("Branch")].setSpawnable(mobIDOf("Wilt") + 1, defaultSpawnables.rarities, defaultSpawnables.cooldowns);
+petalConfigs[petalIDOf("Leech Egg")].setSpawnable(mobIDOf("Leech"), defaultSpawnables.rarities, defaultSpawnables.cooldowns);
+petalConfigs[petalIDOf("Hornet Egg")].setSpawnable(mobIDOf("Hornet"), defaultSpawnables.rarities, defaultSpawnables.cooldowns);
+petalConfigs[petalIDOf("Square Egg")].setSpawnable(mobIDOf("Square"), defaultSpawnables.rarities, defaultSpawnables.cooldowns);
+petalConfigs[petalIDOf("Triangle Egg")].setSpawnable(mobIDOf("Triangle"), defaultSpawnables.rarities, defaultSpawnables.cooldowns);
+petalConfigs[petalIDOf("Pentagon Egg")].setSpawnable(mobIDOf("Pentagon"), defaultSpawnables.rarities, defaultSpawnables.cooldowns);
 
 mobConfigs[mobIDOf("Angelic Ladybug")].setPoopable({
     index: mobIDOf("Evil Ladybug"),

@@ -860,6 +860,18 @@ export default class Client {
                     return;
                 }
 
+                this.atlas = false;
+                const atlasConfirmation = reader.getStringUTF8();
+                switch (atlasConfirmation) {
+                    case 'ATLAS1.0':
+                        this.atlas = '1.0';
+                        break;
+                    
+                    default:
+                        this.kick('This server requires the use of the Atlas client!');
+                        return;
+                };
+
                 this.verified = true;
                 console.log(`Client ${this.id} verified as ${this.username}`);
                 this.talk(CLIENT_BOUND.READY);
@@ -892,6 +904,11 @@ export default class Client {
                 }
                 break;
             case SERVER_BOUND.SPAWN:
+                if (!this.atlas) {
+                    this.kick('This server requires the use of the Atlas client!');
+                    return;
+                };
+
                 if (!this.verified) {
                     this.kick("Not verified");
                     return;
@@ -918,6 +935,11 @@ export default class Client {
                 }
                 break;
             case SERVER_BOUND.INPUTS: {
+                if (!this.atlas) {
+                    this.kick('This server requires the use of the Atlas client!');
+                    return;
+                };
+
                 if (!this.verified) {
                     this.kick("Not verified");
                     return;
@@ -953,6 +975,11 @@ export default class Client {
                 this.body.defend = (flags & 0x20) === 0x20;
             } break;
             case SERVER_BOUND.CHANGE_LOADOUT: {
+                if (!this.atlas) {
+                    this.kick('This server requires the use of the Atlas client!');
+                    return;
+                };
+
                 if (!this.verified) {
                     this.kick("Not verified");
                     return;
@@ -1034,6 +1061,11 @@ export default class Client {
                 }
             } break;
             case SERVER_BOUND.DEV_CHEAT: {
+                if (!this.atlas) {
+                    this.kick('This server requires the use of the Atlas client!');
+                    return;
+                };
+
                 if (!this.verified) {
                     this.kick("Not verified");
                     return;
@@ -1188,6 +1220,11 @@ export default class Client {
                 }
             } break;
             case SERVER_BOUND.CHAT_MESSAGE: {
+                if (!this.atlas) {
+                    this.kick('This server requires the use of the Atlas client!');
+                    return;
+                };
+
                 if (!this.verified) {
                     this.kick("Not verified");
                     return;
