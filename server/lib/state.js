@@ -352,6 +352,8 @@ const state = {
                 get(terrain.x, terrain.y - size)?.type !== 0
             ) state.terrainSpatialHash.insert(terrain);
         });
+
+        console.log(state.terrainSpatialHash.grid.size, state.terrain.size);
     },
 
     sendTerrain: id => {
