@@ -335,9 +335,21 @@ const state = {
     updateTerrain: () => {
         state.terrainSpatialHash.clear();
 
+        const get = (x, y) => {
+            for (const [_, value] of state.terrain) {
+                if (value.x === x && value.y === y) return value;
+            };
+        };
+
         state.terrain.forEach(terrain => {
             terrain._AABB = terrain.polygon._AABB;
-            state.terrainSpatialHash.insert(terrain);
+            if (
+                false &&
+                get(terrain.x + 1, terrain.y)?.type !== 0 &&
+                get(terrain.x, terrain.y + 1)?.type !== 0 &&
+                get(terrain.x - 1, terrain.y)?.type !== 0 &&
+                get(terrain.x, terrain.y - 1)?.type !== 0
+            ) state.terrainSpatialHash.insert(terrain);
         });
     },
 
