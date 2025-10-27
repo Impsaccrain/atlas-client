@@ -890,7 +890,7 @@ export default class Client {
                         secondarySlots: []
                     });
                 } else {
-                    const data = state.permaUUIDs.get(uuid);
+                    const data = state.permaUUIDs.get(clientUUID);
                     this.level = data.level;
                     this.xp = data.xp;
                     this.slots = data.slots;
