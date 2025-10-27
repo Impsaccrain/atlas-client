@@ -1399,6 +1399,9 @@ export default class Client {
             case CLIENT_BOUND.DEATH: // Death packet
                 writer.setStringUTF8(data);
                 break;
+            case CLIENT_BOUND.PERMA_UUID: // Perma UUID packet
+                writer.setUint16(data);
+                break;
             case CLIENT_BOUND.ROOM_UPDATE: // Room update packet
                 writer.setFloat32(data.width);
                 writer.setFloat32(data.height);
