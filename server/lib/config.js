@@ -367,7 +367,12 @@ export const petalConfigs = [
         .setSize(1.1)
         .setMulti([3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4], false)
         .setHuddles(1)
-        .setDescription("A petal that spawns fire ants. They move faster, deal more damage, but have less health.")
+        .setDescription("A petal that spawns fire ants. They move faster, deal more damage, but have less health."),
+    new PetalConfig("Blood Stinger", 43, 1, 35)
+        .setMulti([1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 7, 7], 1)
+        .setSelfDamage(5)
+        .setSize(.8)
+        .setDescription("A fragile petal that uses the blood of its user to deal more damage.")
 ];
 
 export const petalIDOf = name => petalConfigs.findIndex(p => p.name === name);
@@ -799,6 +804,7 @@ export const mobConfigs = [
         })
         .addDrop(petalIDOf("Missile"))
         .setPushability(.8)
+        .addDrop(petalIDOf("Blood Stinger"), .1)
         .addDrop(petalIDOf("Antennae"), .7)
         .addDrop(petalIDOf("Pollen"), .4),
     new MobConfig("Stickbug", 10, 6, 8, 7)

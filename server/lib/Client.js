@@ -1,8 +1,10 @@
 import state from "./state.js";
-import { Entity, Mob, Player } from "./Entity.js";
+import { Entity, Mob, PetalSlot, Player } from "./Entity.js";
 import { Reader, Writer, CLIENT_BOUND, ENTITY_FLAGS, ENTITY_MODIFIER_FLAGS, ROUTER_PACKET_TYPES, SERVER_BOUND, ENTITY_TYPES, DEV_CHEAT_IDS, WEARABLES } from "../../lib/protocol.js";
-import { mobConfigs, mobIDOf, petalConfigs, tiers } from "./config.js";
+import { mobConfigs, mobIDOf, petalConfigs, petalIDOf, tiers } from "./config.js";
 import { xpForLevel } from "../../lib/util.js";
+
+export const ATLAS_VERSION = '1.1';
 
 const blockList = [];
 fetch("./profanity.txt").then(res => res.text()).then(txt => {
@@ -751,6 +753,8 @@ export default class Client {
 
         this.lastChat = 0;
         this.frownyMessages = 0;
+
+        this.permaUUID = null;
     }
 
     addXP(x) {
@@ -854,6 +858,54 @@ export default class Client {
             case SERVER_BOUND.PING:
                 this.talk(CLIENT_BOUND.PONG);
                 break;
+            case SERVER_BOUND.PERMA_UUID:
+                if (!this.atlas) {
+                    this.kick('This server requires the use of the Atlas client!');
+                    return;
+                };
+
+                if (this.atlas !== ATLAS_VERSION) {
+                    this.kick('You are using an outdated Atlas client!');
+                    return;
+                };
+
+                if (!this.verified) {
+                    this.kick("Not verified");
+                    return;
+                }
+
+                const clientUUID = reader.getUint16();
+                if (clientUUID === 0 || !state.permaUUIDs.has(clientUUID)) {
+                    const arr = new Uint16Array(1);
+                    crypto.getRandomValues(arr);
+                    const uuid = arr[0] || 1;
+                    this.talk(CLIENT_BOUND.PERMA_UUID, uuid);
+
+                    this.permaUUID = uuid;
+
+                    state.permaUUIDs.set(uuid, {
+                        level: 0,
+                        xp: 0,
+                        slots: [],
+                        secondarySlots: []
+                    });
+                } else {
+                    const data = state.permaUUIDs.get(uuid);
+                    this.level = data.level;
+                    this.xp = data.xp;
+                    this.slots = data.slots;
+                    this.secondarySlots = data.secondarySlots;
+
+                    this.addXP(0);
+
+                    if (this.body) for (let i = 0; i < this.slots.length; i++) {
+                        this.body.petalSlots[i].destroy();
+                        this.body.petalSlots[i].define(petalConfigs[this.slots[i].id], this.slots[i].rarity);
+                    };
+
+                    this.permaUUID = clientUUID;
+                };
+                break;
             case SERVER_BOUND.VERIFY:
                 if (this.verified) {
                     this.kick("Already verified");
@@ -868,15 +920,24 @@ export default class Client {
                 }
 
                 this.atlas = false;
-                const atlasConfirmation = reader.getStringUTF8();
-                switch (atlasConfirmation) {
-                    case 'ATLAS1.0':
-                        this.atlas = '1.0';
-                        break;
-                    
-                    default:
-                        this.kick('This server requires the use of the Atlas client!');
-                        return;
+                if (reader._o >= reader.view.byteLength) {
+                    const atlasConfirmation = reader.getStringUTF8();
+                    switch (atlasConfirmation) {
+                        case 'ATLAS1.0':
+                            this.atlas = '1.0';
+                            break;
+                        
+                        case 'ATLAS1.1':
+                            this.atlas = '1.1';
+                            break;
+                        
+                        default:
+                            this.kick('This server requires the use of the Atlas client!');
+                            return;
+                    };
+                } else {
+                    this.kick('This server requires the use of the Atlas client!');
+                    return;
                 };
 
                 this.verified = true;
@@ -916,6 +977,11 @@ export default class Client {
                     return;
                 };
 
+                if (this.atlas !== ATLAS_VERSION) {
+                    this.kick('You are using an outdated Atlas client!');
+                    return;
+                };
+
                 if (!this.verified) {
                     this.kick("Not verified");
                     return;
@@ -944,6 +1010,11 @@ export default class Client {
             case SERVER_BOUND.INPUTS: {
                 if (!this.atlas) {
                     this.kick('This server requires the use of the Atlas client!');
+                    return;
+                };
+
+                if (this.atlas !== ATLAS_VERSION) {
+                    this.kick('You are using an outdated Atlas client!');
                     return;
                 };
 
@@ -984,6 +1055,11 @@ export default class Client {
             case SERVER_BOUND.CHANGE_LOADOUT: {
                 if (!this.atlas) {
                     this.kick('This server requires the use of the Atlas client!');
+                    return;
+                };
+
+                if (this.atlas !== ATLAS_VERSION) {
+                    this.kick('You are using an outdated Atlas client!');
                     return;
                 };
 
@@ -1070,6 +1146,11 @@ export default class Client {
             case SERVER_BOUND.DEV_CHEAT: {
                 if (!this.atlas) {
                     this.kick('This server requires the use of the Atlas client!');
+                    return;
+                };
+
+                if (this.atlas !== ATLAS_VERSION) {
+                    this.kick('You are using an outdated Atlas client!');
                     return;
                 };
 
@@ -1232,6 +1313,11 @@ export default class Client {
                     return;
                 };
 
+                if (this.atlas !== ATLAS_VERSION) {
+                    this.kick('You are using an outdated Atlas client!');
+                    return;
+                };
+
                 if (!this.verified) {
                     this.kick("Not verified");
                     return;
@@ -1339,6 +1425,13 @@ export default class Client {
 
     onClose() {
         if (this.verified) {
+            if (this.permaUUID) state.permaUUIDs.set(this.permaUUID, {
+                level: this.level,
+                xp: this.xp,
+                slots: this.slots,
+                secondarySlots: this.secondarySlots
+            });
+
             console.log(`Client ${this.id} (${this.username}) disconnected`);
 
             if (this.body && !this.body.health.isDead && this.level >= 20) {
