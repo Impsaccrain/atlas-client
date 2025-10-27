@@ -343,6 +343,7 @@ const state = {
 
         state.terrain.forEach(terrain => {
             terrain._AABB = terrain.polygon._AABB;
+            console.log(get(terrain.x, terrain.y));
             if (
                 get(terrain.x + 1, terrain.y)?.type !== 0 &&
                 get(terrain.x, terrain.y + 1)?.type !== 0 &&
