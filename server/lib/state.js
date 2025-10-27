@@ -19,6 +19,8 @@ export class Zone {
 const state = {
     /** @type {Map<number, { slots: { name: string, rarity: number }[], secondarySlots: ({ name: string, rarity: number } | null)[], level: number, xp: number }>} */
     permaUUIDs: new Map,
+    /** @type {Set<number>} */
+    activeUUIDs: new Set,
 
     /** @type {import("./Router.js").default} */
     router: null,

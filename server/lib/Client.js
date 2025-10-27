@@ -875,6 +875,12 @@ export default class Client {
                 }
 
                 const clientUUID = reader.getUint16();
+
+                if (state.activeUUIDs.has(clientUUID)) {
+                    this.kick("You cannot open this on multiple tabs!");
+                    return;
+                };
+
                 if (clientUUID === 0 || !state.permaUUIDs.has(clientUUID)) {
                     const arr = new Uint16Array(1);
                     crypto.getRandomValues(arr);
@@ -882,6 +888,7 @@ export default class Client {
                     this.talk(CLIENT_BOUND.PERMA_UUID, uuid);
 
                     this.permaUUID = uuid;
+                    state.activeUUIDs.add(uuid);
 
                     state.permaUUIDs.set(uuid, {
                         level: 0,
@@ -904,6 +911,7 @@ export default class Client {
                     };
 
                     this.permaUUID = clientUUID;
+                    state.activeUUIDs.add(clientUUID);
                 };
                 break;
             case SERVER_BOUND.VERIFY:
@@ -1428,12 +1436,16 @@ export default class Client {
 
     onClose() {
         if (this.verified) {
-            if (this.permaUUID) state.permaUUIDs.set(this.permaUUID, {
-                level: this.level,
-                xp: this.xp,
-                slots: this.slots,
-                secondarySlots: this.secondarySlots
-            });
+            if (this.permaUUID) {
+                state.permaUUIDs.set(this.permaUUID, {
+                    level: this.level,
+                    xp: this.xp,
+                    slots: this.slots,
+                    secondarySlots: this.secondarySlots
+                });
+
+                state.activeUUIDs.delete(this.permaUUID);
+            };
 
             console.log(`Client ${this.id} (${this.username}) disconnected`);
 
