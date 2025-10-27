@@ -335,6 +335,8 @@ const state = {
     updateTerrain: () => {
         state.terrainSpatialHash.clear();
 
+        const size = state.width / state.terrainGridWidth;
+
         const get = (x, y) => {
             for (const [_, value] of state.terrain) {
                 if (value.x === x && value.y === y) return value;
@@ -343,12 +345,11 @@ const state = {
 
         state.terrain.forEach(terrain => {
             terrain._AABB = terrain.polygon._AABB;
-            console.log(get(terrain.x, terrain.y));
             if (
-                get(terrain.x + 1, terrain.y)?.type !== 0 &&
-                get(terrain.x, terrain.y + 1)?.type !== 0 &&
-                get(terrain.x - 1, terrain.y)?.type !== 0 &&
-                get(terrain.x, terrain.y - 1)?.type !== 0
+                get(terrain.x + size, terrain.y)?.type !== 0 &&
+                get(terrain.x, terrain.y + size)?.type !== 0 &&
+                get(terrain.x - size, terrain.y)?.type !== 0 &&
+                get(terrain.x, terrain.y - size)?.type !== 0
             ) state.terrainSpatialHash.insert(terrain);
         });
     },
