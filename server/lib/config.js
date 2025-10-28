@@ -43,7 +43,7 @@ export const petalConfigs = [
     new PetalConfig("Leaf", 10, 8, 6)
         .setSize(1.2)
         .setConstantHeal(4.5)
-        .setPetHeal(3.5)
+        .setPetHeal(8.5)
         .setDescription("A petal that heals you over time by the power of photosynthesis."),
     new PetalConfig("Wing", 15, 10, 10)
         .setSize(1.3)
