@@ -20,7 +20,8 @@ const MAP_TYPES = {
     sleepyMaze: `${GITHUB_LINK}/server/maps/sleepyMaze.json`,
     sleepyMazeOmega: `${GITHUB_LINK}/server/maps/sleepyMazeOmega.json`,
     atlasHell: `${GITHUB_LINK}/server/maps/atlasHell.json`,
-    atlasGarden: `${GITHUB_LINK}/server/maps/atlasGarden.json`
+    atlasGarden: `${GITHUB_LINK}/server/maps/atlasGarden.json`,
+    atlasPyramid: `${GITHUB_LINK}/server/maps/atlasPyramid.json`
 };
 
 let mapSrc = MAP_TYPES.standard,
@@ -38,7 +39,7 @@ export default async function initTerrain(type, atlas = true) {
                 mapSrc = atlas ? MAP_TYPES.atlasGarden : MAP_TYPES.sleepyMazeOmega;
                 break;
             case BIOME_TYPES.DESERT:
-                mapSrc = MAP_TYPES.desert;
+                mapSrc = atlas ? MAP_TYPES.atlasPyramid : MAP_TYPES.desert;
                 break;
             case BIOME_TYPES.OCEAN:
                 mapSrc = MAP_TYPES.ocean;
