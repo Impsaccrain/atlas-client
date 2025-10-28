@@ -860,7 +860,7 @@ export default class Client {
                 break;
             case SERVER_BOUND.PERMA_UUID:
                 if (!this.atlas) {
-                    this.kick('This server requires the use of the Atlas client!');
+                    this.kick('This server requires the use of the Atlas client: https://impsaccrain.github.io/atlas-client/');
                     return;
                 };
 
@@ -940,11 +940,11 @@ export default class Client {
                             break;
                         
                         default:
-                            this.kick('This server requires the use of the Atlas client!');
+                            this.kick('This server requires the use of the Atlas client: https://impsaccrain.github.io/atlas-client/');
                             return;
                     };
                 } else {
-                    this.kick('This server requires the use of the Atlas client!');
+                    this.kick('This server requires the use of the Atlas client: https://impsaccrain.github.io/atlas-client/');
                     return;
                 };
 
@@ -981,7 +981,7 @@ export default class Client {
                 break;
             case SERVER_BOUND.SPAWN:
                 if (!this.atlas) {
-                    this.kick('This server requires the use of the Atlas client!');
+                    this.kick('This server requires the use of the Atlas client: https://impsaccrain.github.io/atlas-client/');
                     return;
                 };
 
@@ -1017,7 +1017,7 @@ export default class Client {
                 break;
             case SERVER_BOUND.INPUTS: {
                 if (!this.atlas) {
-                    this.kick('This server requires the use of the Atlas client!');
+                    this.kick('This server requires the use of the Atlas client: https://impsaccrain.github.io/atlas-client/');
                     return;
                 };
 
@@ -1062,7 +1062,7 @@ export default class Client {
             } break;
             case SERVER_BOUND.CHANGE_LOADOUT: {
                 if (!this.atlas) {
-                    this.kick('This server requires the use of the Atlas client!');
+                    this.kick('This server requires the use of the Atlas client: https://impsaccrain.github.io/atlas-client/');
                     return;
                 };
 
@@ -1153,7 +1153,7 @@ export default class Client {
             } break;
             case SERVER_BOUND.DEV_CHEAT: {
                 if (!this.atlas) {
-                    this.kick('This server requires the use of the Atlas client!');
+                    this.kick('This server requires the use of the Atlas client: https://impsaccrain.github.io/atlas-client/');
                     return;
                 };
 
@@ -1317,7 +1317,7 @@ export default class Client {
             } break;
             case SERVER_BOUND.CHAT_MESSAGE: {
                 if (!this.atlas) {
-                    this.kick('This server requires the use of the Atlas client!');
+                    this.kick('This server requires the use of the Atlas client: https://impsaccrain.github.io/atlas-client/');
                     return;
                 };
 
