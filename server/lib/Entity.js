@@ -1870,7 +1870,9 @@ export class Mob extends Entity {
             this.poopable = {
                 index: config.poopable.index,
                 ticker: 0,
-                interval: config.poopable.interval
+                interval: config.poopable.interval,
+                poops: 0,
+                max: 15
             };
         }
 
@@ -2071,10 +2073,11 @@ export class Mob extends Entity {
             this.tick--;
 
             if (this.target?.health.ratio > .001) {
-                if (this.poopable !== null) {
+                if (this.poopable !== null && this.poopable.poops < this.poopable.max) {
                     this.poopable.ticker++;
 
                     if (this.poopable.ticker >= this.poopable.interval) {
+                        this.poopable.poops++;
                         this.poopable.ticker = 0;
 
                         const poop = new Mob(this);
