@@ -730,7 +730,7 @@ export class Entity {
         this.hit = Math.max(0, this.hit - 1);
     }
 
-    collide(selfDamage) {
+    collide() {
         const collisions = state.spatialHash.retrieve(this);
 
         collisions.forEach(/** @param {Entity} other */ other => {
@@ -835,6 +835,10 @@ export class Entity {
                     }
 
                     if (this.type === ENTITY_TYPES.PLAYER || this.type === ENTITY_TYPES.MOB) {
+                        if (other.parent && other.selfDamage > 0) {
+                            other.parent.health.damage(other.selfDamage);
+                        };
+
                         if (this.parent && this.config?.name === "Leech") {
                             let existing = this.parent.damagedBy[other.parent.id] || [0, other.parent.type, other.parent.type === ENTITY_TYPES.PLAYER ? other.parent.name : other.parent.index, other.parent.type === ENTITY_TYPES.PLAYER && other.parent.client ? other.parent.client.id : null];
                             existing[0] += other.damage;
@@ -1237,7 +1241,7 @@ export class Petal extends Entity {
             });
         }
 
-        super.collide(true);
+        super.collide();
     }
 
     destroy() {
