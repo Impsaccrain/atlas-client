@@ -368,7 +368,7 @@ export const petalConfigs = [
         .setMulti([3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4], false)
         .setHuddles(1)
         .setDescription("A petal that spawns fire ants. They move faster, deal more damage, but have less health."),
-    new PetalConfig("Blood Stinger", 43, 1, 35)
+    new PetalConfig("Blood Stinger", 43, 1, 45)
         .setMulti([1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 7, 7], 1)
         .setSelfDamage(5)
         .setSize(.8)
