@@ -1368,7 +1368,7 @@ export default class Client {
                     return;
                 }
 
-                if (performance.now() - this.lastChat < 1000) {
+                if (performance.now() - this.lastChat < 200) {
                     this.systemMessage("You're chatting too fast.", "#22CACA");
                     return;
                 }
