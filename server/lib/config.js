@@ -877,7 +877,14 @@ export const mobConfigs = [
         })
         .addDrop(petalIDOf("Square Egg"), .1)
         .addDrop(petalIDOf("Triangle Egg"), .05)
-        .addDrop(petalIDOf("Pentagon Egg"), .01)
+        .addDrop(petalIDOf("Pentagon Egg"), .01),
+    new MobConfig("Wormhole", 43, 7, 25, 4.5)
+        .setAggressive(1)
+        .setSandstormMovement(1)
+        .setSize(17, MobTier.SIZE_SCALE, .9, .25)
+        .addDrop("wormhole.any")
+        .addDrop("wormhole.any")
+        .addDrop("wormhole.any")
 ];
 
 // Flu: Wing, Faster, Third Eye

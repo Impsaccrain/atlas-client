@@ -928,7 +928,7 @@ export default class Client {
                 }
 
                 this.atlas = false;
-                if (reader.view.byteLength >= reader._o) {
+                if (reader.view.byteLength > reader._o) {
                     const atlasConfirmation = reader.getStringUTF8();
                     switch (atlasConfirmation) {
                         case 'ATLAS1.0':

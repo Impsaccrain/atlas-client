@@ -2338,7 +2338,8 @@ export class Mob extends Entity {
                             continue;
                         }
 
-                        output.push(new Drop(this, client, drop.index, rarity));
+                        const index = drop.index === 'wormhole.any' ? randomPossiblePetal(rarity) : drop.index;
+                        output.push(new Drop(this, client, index, rarity));
                     }
 
                     for (let i = 0; i < output.length; i++) {
