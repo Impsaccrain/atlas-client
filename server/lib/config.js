@@ -136,7 +136,7 @@ export const petalConfigs = [
         .setMulti(2, false)
         .setDescription("A bundle of sticks... I wonder what'll happen if you spin them around in the desert..."),
     new PetalConfig("scorpion.projectile", 1024, 4, 4)
-        .setPoison(1.5, 8)
+        .setPoison(1.25, 8)
         .setDescription("[object null object]"),
     new PetalConfig("Dahlia", 10, 5, 5)
         .setHealing(2)

@@ -1876,7 +1876,7 @@ export class Mob extends Entity {
 
         if (config.segment) {
             const segmentID = Mob.segmentedLength++;
-            const count = 4 + this.rarity / 1.5 | 0;
+            const count = 6 - this.rarity / 7.5 | 0;
             let last = this;
 
             this.segmentID = segmentID;
@@ -2080,7 +2080,7 @@ export class Mob extends Entity {
                         const poop = new Mob(this);
                         poop.x -= Math.cos(this.facing) * this.size * 2;
                         poop.y -= Math.sin(this.facing) * this.size * 2;
-                        poop.define(mobConfigs[this.poopable.index], this.rarity);
+                        poop.define(mobConfigs[this.poopable.index], this.rarity <= 7 ? this.rarity : (this.rarity <= 15 ? this.rarity - 1 : this.rarity - 2));
                         poop.team = this.team;
                         poop.parent = this;
 
