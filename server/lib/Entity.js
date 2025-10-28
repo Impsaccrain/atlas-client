@@ -368,7 +368,7 @@ export class PetalSlot {
                 if (this.config.tiers[this.rarity].petHeal > 0) {
                     this.player.petalSlots.forEach(petal => {
                         if (petal?.boundMobs?.length) petal.boundMobs.forEach(mobs => mobs.forEach(mob => {
-                            mob.health.health = Math.min(mob.health.maxHealth, mob.health.health + this.config.tiers[this.rarity].petHeal);
+                            if (mob.health.ratio < 1 && mob.health.ratio > .001) mob.health.health = Math.min(mob.health.maxHealth, mob.health.health + this.config.tiers[this.rarity].petHeal);
                         }));
                     });
                 };
