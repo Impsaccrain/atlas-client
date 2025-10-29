@@ -172,7 +172,7 @@ setInterval(() => {
             }
         } break;
         case GAMEMODES.MAZE:
-            state.maxMobs = state.biome === BIOME_TYPES.ANT_HELL ? (32 + 12 * state.clients.size) : (24 + 6 * state.clients.size);
+            state.maxMobs = state.biome === BIOME_TYPES.ANT_HELL ? 252 : 184;
             break;
     }
 

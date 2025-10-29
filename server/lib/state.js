@@ -375,7 +375,7 @@ const state = {
     terrainGridWidth: 0,
     terrainGridHeight: 0,
 
-    maxMobs: 6,
+    maxMobs: 300,
 
     livingMobCount: 0,
 
