@@ -524,7 +524,7 @@ function draw() {
         ctx.restore();
     });
 
-    wormholePulseNumber = (Math.sin(performance.now() / 5) + 1) / 5;
+    wormholePulseNumber = (Math.sin(performance.now() / 500) + 1) / 5 + 0.2;
     net.state.mobs.forEach(entity => {
         entity.interpolate();
 
