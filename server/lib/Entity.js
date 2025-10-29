@@ -8,7 +8,7 @@ export class HealthComponent {
     constructor(x) {
         this.health = x;
         this.maxHealth = x;
-        this.lastDamaged = 0;
+        this.lastDamaged = Date.now();
         this.damageReduction = 0;
         this.invulnerable = false;
         this.onDamage = null;
@@ -2034,7 +2034,17 @@ export class Mob extends Entity {
             return;
         }
 
-        if (state.mobsExpire && (this.head === null || this.head.health.isDead) && ((this.lastSeen + (this.health.ratio <= .8 ? 120_000 : 30_000)) < performance.now() || this.health.lastDamaged < (Date.now() - 10_000))) {
+        if (
+            state.mobsExpire &&
+            (
+                this.head === null ||
+                this.head.health.isDead
+            ) &&
+            (
+                (this.lastSeen + (this.health.ratio <= .8 ? 120_000 : 30_000)) < performance.now() ||
+                this.health.lastDamaged < (Date.now() - 10_000)
+            )
+        ) {
             this.damagedBy = []
             this.destroy();
             return;
