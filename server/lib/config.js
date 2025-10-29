@@ -1090,7 +1090,7 @@ export const randomPossiblePetal = (rarity) => {
 
     mobConfigs.forEach(mob => {
         mob.drops.forEach(drop => {
-            if (drop.index > -1 && rarity >= drop.minRarity) {
+            if (drop !== 'wormhole.any' && drop.index > -1 && rarity >= drop.minRarity) {
                 possible.push(drop.index);
             }
         });

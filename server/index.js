@@ -178,11 +178,11 @@ setInterval(() => {
 
     if (!state.isWaves && state.livingMobCount < state.maxMobs && Math.random() > .9) {
         if (Math.random() > .999) {
-            const info = state.spawnNearPlayer(mobConfigs[0]);
+            const info = state.spawnRandom(mobConfigs[0]);
             new AIPlayer(info.position, info.rarity, Math.max(1, info.rarity * 10 + (Math.random() * 6 | 0 - 3)));
         } else if (state.gamemode === GAMEMODES.MAZE) {
             let cfg = mobConfigs[getMobIndex()];
-            const info = state.spawnNearPlayer(cfg);
+            const info = state.spawnRandom(cfg);
             if (info.tile?.spawn !== undefined) {
                 const spawner = state.mapData.mobSpawners.find(spawner => {
                     spawner.id == info.tile?.spawn;
@@ -937,7 +937,7 @@ class ModdingAPI {
                     return;
                 }
 
-                const mob = new AIPlayer(state.random(), args[0], args[1] - 1);
+                const mob = new AIPlayer(state.mapBasedSpawn(ENTITY_TYPES.MOB), args[0], args[1] - 1);
                 this.floofModdingResponse(jobID, true, "AI Flower spawned successfully", {
                     id: mob.id,
                     level: mob.client.level,

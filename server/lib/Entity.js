@@ -2034,7 +2034,7 @@ export class Mob extends Entity {
             return;
         }
 
-        if (state.mobsExpire && (this.head === null || this.head.health.isDead) && (this.lastSeen + (this.health.ratio <= .8 ? 120_000 : 30_000)) < performance.now()) {
+        if (state.mobsExpire && (this.head === null || this.head.health.isDead) && ((this.lastSeen + (this.health.ratio <= .8 ? 120_000 : 30_000)) < performance.now() || this.health.lastDamaged < (Date.now() - 10_000))) {
             this.damagedBy = []
             this.destroy();
             return;
