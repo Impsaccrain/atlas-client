@@ -2042,7 +2042,7 @@ export class Mob extends Entity {
             ) &&
             (
                 (this.lastSeen + (this.health.ratio <= .8 ? 120_000 : 30_000)) < performance.now() ||
-                this.health.lastDamaged < (Date.now() - 10_000)
+                this.health.lastDamaged < (Date.now() - 300_000)
             )
         ) {
             this.damagedBy = []
