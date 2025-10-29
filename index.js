@@ -6,7 +6,7 @@ import { BIOME_BACKGROUNDS, BIOME_TYPES, DEV_CHEAT_IDS, SERVER_BOUND, terrains, 
 import { drawMob, drawPetal, getPetalIcon, drawUIPetal, petalTooltip, drawThirdEye, drawAntennae, pentagram, drawAmulet, drawPetalIconWithRatio, drawArmor } from "./lib/renders.js";
 import { beginDragDrop, DRAG_TYPE_DESTROY, DRAG_TYPE_MAINDOCKER, DRAG_TYPE_SECONDARYDOCKER, dragConfig, updateAndDrawDragDrop } from "./lib/dragAndDrop.js";
 import { loadAndRenderChangelogs, showMenu, showMenus } from "./lib/menus.js";
-let wormholePulseNumber = (Math.sin(performance.now() / 5) + 1) / 5;
+let wormholePulse = (Math.sin(performance.now() / 5) + 1) / 5;
 
 if (location.hash) {
     fetch(SERVER_URL + "/lobby/get?partyURL=" + location.hash.slice(1)).then(response => {
@@ -524,7 +524,7 @@ function draw() {
         ctx.restore();
     });
 
-    wormholePulseNumber = (Math.sin(performance.now() / 500) + 1) / 5 + 0.2;
+    wormholePulse = (Math.sin(performance.now() / 500) + 1) / 2;
     net.state.mobs.forEach(entity => {
         entity.interpolate();
 
@@ -543,7 +543,7 @@ function draw() {
             ctx.shadowColor = "#FFFFFF";
         }
 
-        drawMob(entity.id, entity.index, entity.rarity, entity.hit, ctx, entity.attack, entity.friendly, entity.facing, entity.extraData, wormholePulseNumber);
+        drawMob(entity.id, entity.index, entity.rarity, entity.hit, ctx, entity.attack, entity.friendly, entity.facing, entity.extraData, wormholePulse);
         ctx.restore();
 
         if (options.showHitboxes) {
