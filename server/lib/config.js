@@ -428,7 +428,8 @@ export const mobConfigs = [
         .setNeutral(1)
         .addDrop(petalIDOf("Antennae"))
         .addDrop(petalIDOf("Magnolia"), .6)
-        .addDrop(petalIDOf("Bone"), .6),
+        .addDrop(petalIDOf("Bone"), .6)
+        .addDrop(petalIDOf("Powder"), .6),
     new MobConfig("Hornet", 55, 4, 24, 3)
         .setAggressive(1)
         .setProjectile({

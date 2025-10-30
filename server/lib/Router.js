@@ -62,7 +62,8 @@ function applyBiome(int) {
             [mobIDOf("Leafbug")]: 3,
             [mobIDOf("Mantis")]: 2,
             [mobIDOf("Centipede")]: 2,
-            [mobIDOf("Ant Hole")]: 1
+            [mobIDOf("Ant Hole")]: 1,
+            [mobIDOf("Wormhole")]: 1
         }),
         [BIOME_TYPES.DESERT]: createTable({
             [mobIDOf("Beetle")]: 10,
@@ -71,7 +72,8 @@ function applyBiome(int) {
             [mobIDOf("Cactus")]: 9,
             [mobIDOf("Desert Centipede")]: 8,
             [mobIDOf("Fire Ant Hole")]: 7,
-            [mobIDOf("Shiny Ladybug")]: 1
+            [mobIDOf("Shiny Ladybug")]: 1,
+            [mobIDOf("Wormhole")]: 1
         }),
         [BIOME_TYPES.OCEAN]: createTable({
             [mobIDOf("Jellyfish")]: 5,
@@ -80,7 +82,8 @@ function applyBiome(int) {
             [mobIDOf("Shell")]: 4,
             [mobIDOf("Starfish")]: 3,
             [mobIDOf("Leech")]: 3,
-            [mobIDOf("Crab")]: 2.5
+            [mobIDOf("Crab")]: 2.5,
+            [mobIDOf("Wormhole")]: 1
         }),
         [BIOME_TYPES.SEWERS]: createTable({
             [mobIDOf("Fly")]: 5,
@@ -91,7 +94,8 @@ function applyBiome(int) {
             [mobIDOf("Spider")]: 3,
             [mobIDOf("Rock")]: 2,
             [mobIDOf("Evil Ladybug")]: 2,
-            [mobIDOf("Evil Centipede")]: 1
+            [mobIDOf("Evil Centipede")]: 1,
+            [mobIDOf("Wormhole")]: 1
         }),
         [BIOME_TYPES.ANT_HELL]: createTable({
             [mobIDOf("Baby Ant")]: 5,
@@ -108,7 +112,8 @@ function applyBiome(int) {
             [mobIDOf("Worker Termite")]: 5,
             [mobIDOf("Soldier Termite")]: 5,
             [mobIDOf("Termite Overmind")]: 1,
-            [mobIDOf("Termite Egg")]: 2
+            [mobIDOf("Termite Egg")]: 2,
+            [mobIDOf("Wormhole")]: 1
         }),
         [BIOME_TYPES.HELL]: createTable({
             [mobIDOf("Hell Beetle")]: 25,
@@ -116,7 +121,8 @@ function applyBiome(int) {
             [mobIDOf("Hell Yellowjacket")]: 20,
             [mobIDOf("Hell Centipede")]: 5,
             [mobIDOf("Demon")]: 2,
-            [mobIDOf("Angelic Ladybug")]: 1
+            [mobIDOf("Angelic Ladybug")]: 1,
+            [mobIDOf("Wormhole")]: 1
         }),
         [BIOME_TYPES.HALLOWEEN]: createTable({
             [mobIDOf("Hell Beetle")]: 5,
@@ -129,7 +135,8 @@ function applyBiome(int) {
             [mobIDOf("Spirit")]: 4,
             [mobIDOf("Wilt")]: 3,
             [mobIDOf("Demon")]: 2,
-            [mobIDOf("Termite Mound")]: 1
+            [mobIDOf("Termite Mound")]: 1,
+            [mobIDOf("Wormhole")]: 1
         }),
         [BIOME_TYPES.DARK_FOREST]: createTable({
             [mobIDOf("Evil Centipede")]: 2,
@@ -144,7 +151,8 @@ function applyBiome(int) {
             [mobIDOf("Spider")]: 25,
             [mobIDOf("Fly")]: 12.5,
             [mobIDOf("Stickbug")]: 8,
-            [mobIDOf("Shrub")]: 15
+            [mobIDOf("Shrub")]: 15,
+            [mobIDOf("Wormhole")]: 1
         }),
     }[int];
 

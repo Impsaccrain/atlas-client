@@ -1004,6 +1004,14 @@ export default class Client {
                 this.body.nameColor = this.nameColor;
                 this.body.client = this;
                 this.body.health.set(this.healthAdjustement);
+
+                if (!this.body.health.invulnerable) {
+                    this.body.health.invulnerable = true;
+                    setTimeout(() => {
+                        this.body.health.invulnerable = false;
+                    }, 5000);
+                };
+
                 this.body.damage = this.bodyDamageAdjustment;
 
                 this.body.initSlots(this.slots.length);

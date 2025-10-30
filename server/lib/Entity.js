@@ -1420,7 +1420,6 @@ export class Player extends Entity {
             const mobKillers = {};
 
             const xpToGift = this.petalSlots.reduce((acc, slot) => acc + Math.pow(slot.rarity + 1, 3), 0);
-            this.client.addXP(-Math.random() * .1 * this.client.xp);
 
             topDamagers.forEach(damager => {
                 if (damager.type === ENTITY_TYPES.PLAYER) {
