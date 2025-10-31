@@ -22,7 +22,8 @@ const MAP_TYPES = {
     atlasHell: `${GITHUB_LINK}/server/maps/atlasHell.json`,
     atlasGarden: `${GITHUB_LINK}/server/maps/atlasGarden.json`,
     atlasPyramid: `${GITHUB_LINK}/server/maps/atlasPyramid.json`,
-    atlasSnake: `${GITHUB_LINK}/server/maps/atlasSnake.json`
+    atlasSnake: `${GITHUB_LINK}/server/maps/atlasSnake.json`,
+    atlasDarkForest: `${GITHUB_LINK}/server/maps/atlasDarkForest.json`
 };
 
 let mapSrc = MAP_TYPES.standard,
@@ -55,7 +56,7 @@ export default async function initTerrain(type, atlas = true) {
                 mapSrc = atlas ? MAP_TYPES.atlasSnake : MAP_TYPES.sewers;
                 break;
             case BIOME_TYPES.DARK_FOREST:
-                mapSrc = MAP_TYPES.darkForest;
+                mapSrc = atlas ? MAP_TYPES.atlasDarkForest : MAP_TYPES.darkForest;
                 break;
             default:
                 throw new Error("Invalid biome type");
