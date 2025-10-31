@@ -1,4 +1,4 @@
-import { CLIENT_BOUND, ENTITY_TYPES, getTerrain, PetalTier, tiers, WEARABLES } from "../../lib/protocol.js";
+import { CLIENT_BOUND, ENTITY_TYPES, getTerrain, PetalTier, tiers } from "../../lib/protocol.js";
 import { angleDiff, applyArticle, getDropRarity, lerpAngle, quickDiff, xpForLevel } from "../../lib/util.js";
 import { MobConfig, mobConfigs, PetalConfig, petalConfigs, petalIDOf, randomPossiblePetal } from "./config.js";
 import state from "./state.js";
@@ -113,6 +113,7 @@ export class PetalSlot {
         this.boundMobs = new Array(this.amount).fill(null).map(() => []);
 
         this.player.health.set(Math.max(1e-10, this.player.health.maxHealth + this.config.tiers[rarityID].extraHealth));
+        this.player.extraBodyDamage += this.config.tiers[rarityID].bodyDamage;
         this.player.health.damageReduction += this.config.tiers[rarityID].damageReduction;
         this.player.size += this.config.tiers[rarityID].extraSize;
         this.player.speed *= this.config.tiers[rarityID].speedMultiplier;
@@ -147,6 +148,7 @@ export class PetalSlot {
     destroy() {
         this.petals.forEach(petal => petal?.destroy());
         this.player.health.set(this.player.health.maxHealth - this.config.tiers[this.rarity].extraHealth);
+        this.player.extraBodyDamage -= this.config.tiers[this.rarity].bodyDamage;
         this.player.health.damageReduction -= this.config.tiers[this.rarity].damageReduction;
         this.player.size -= this.config.tiers[this.rarity].extraSize;
         this.player.speed /= this.config.tiers[this.rarity].speedMultiplier;
@@ -593,6 +595,7 @@ export class Entity {
         this.damageReflection = 0;
         this.healBack = 0;
         this.aggroLevel = 0;
+        this.extraBodyDamage = 0;
 
         this.canBeViewed = true;
 
@@ -783,6 +786,9 @@ export class Entity {
                         otherDamageDone += other.damage * other.extraDamage.multiplier;
                     }
 
+                    if (this.extraBodyDamage && this.extraBodyDamage > 0) thisDamageDone += this.extraBodyDamage;
+                    if (other.extraBodyDamage && this.extraBodyDamage > 0) otherDamageDone += other.extraBodyDamage;
+
                     if (this.absorbStacks.size > 0) {
                         let done = false;
 
@@ -844,7 +850,21 @@ export class Entity {
 
                     if (this.type === ENTITY_TYPES.PLAYER || this.type === ENTITY_TYPES.MOB) {
                         if (other.parent && other.selfDamage > 0) {
-                            other.parent.health.damage(other.selfDamage);
+                            if (other.parent.absorbStacks.size > 0) {
+                                let done = false;
+
+                                other.parent.absorbStacks.forEach(stack => {
+                                    if (!done && stack.addStack(other.selfDamage)) {
+                                        done = true;
+                                    }
+                                });
+
+                                if (!done) {
+                                    other.parent.health.damage(other.selfDamage);
+                                }
+                            } else {
+                                other.parent.health.damage(other.selfDamage);
+                            }
                         };
 
                         if (this.parent && this.config?.name === "Leech") {
@@ -862,7 +882,21 @@ export class Entity {
 
                     if (other.type === ENTITY_TYPES.PLAYER || other.type === ENTITY_TYPES.MOB) {
                         if (this.parent && this.selfDamage > 0) {
-                            this.parent.health.damage(this.selfDamage);
+                            if (this.parent.absorbStacks.size > 0) {
+                                let done = false;
+
+                                this.parent.absorbStacks.forEach(stack => {
+                                    if (!done && stack.addStack(this.selfDamage)) {
+                                        done = true;
+                                    }
+                                });
+
+                                if (!done) {
+                                    this.parent.health.damage(this.selfDamage);
+                                }
+                            } else {
+                                this.parent.health.damage(this.selfDamage);
+                            }
                         };
 
                         if (other.parent && other.config?.name === "Leech") {

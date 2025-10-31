@@ -373,7 +373,13 @@ export const petalConfigs = [
         .setMulti([1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 7, 7], 1)
         .setSelfDamage(3)
         .setSize(.8)
-        .setDescription("A fragile petal that uses the blood of its user to deal more damage.")
+        .setDescription("A fragile petal that uses the blood of its user to deal more damage."),
+    new PetalConfig("Cutter", 0, 0, 0)
+        .setMulti(0, false)
+        .setWearable(WEARABLES.CUTTER)
+        .setExtraHealth(5)
+        .setBodyDamage(5)
+        .setDescription("This petal can cut through large groups of mobs.")
 ];
 
 export const petalIDOf = name => petalConfigs.findIndex(p => p.name === name);

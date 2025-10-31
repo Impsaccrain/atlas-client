@@ -1382,17 +1382,18 @@ export default class Client {
                 }
 
                 this.lastChat = performance.now();
-                state.clients.forEach(c => c.chatMessage(this.username, message, this.nameColor));
+                state.clients.forEach(c => c.chatMessage(this.id, this.username, message, this.nameColor));
             } break;
         }
     }
 
-    chatMessage(username, message, color) {
+    chatMessage(id, username, message, color) {
         this.talk(CLIENT_BOUND.CHAT_MESSAGE, {
             type: 0,
-            username: username,
-            message: message,
-            color: color
+            id,
+            username,
+            message,
+            color
         });
     }
 
@@ -1431,7 +1432,7 @@ export default class Client {
                 writer.setUint8(data.type);
 
                 if (data.type === 0) {
-                    writer.setStringUTF8(data.username);
+                    writer.setStringUTF8(`[${data.id}] ${data.username}`);
                 }
 
                 writer.setStringUTF8(data.message);

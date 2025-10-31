@@ -634,6 +634,15 @@ function draw() {
             ctx.restore();
         }
 
+        if (entity.wearing & WEARABLES.CUTTER) {
+            ctx.save();
+            ctx.translate(drawX, drawY);
+            ctx.rotate(performance.now() / 250 + entity.id * 5);
+            ctx.scale(size * 1.325, size * 1.325);
+            drawCutter(ctx);
+            ctx.restore();
+        }
+
         ctx.beginPath();
         ctx.arc(drawX, drawY, size, 0, Math.PI * 2);
         ctx.stroke();
